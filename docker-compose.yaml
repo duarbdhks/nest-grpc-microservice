@@ -1,0 +1,87 @@
+version: "3"
+
+services:
+  comments-service:
+    image: "comments-service:dev"
+    build:
+      context: "./microservices/comments-service"
+    expose:
+      - "50051"
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=development
+      - URL=0.0.0.0
+      - PORT=50051
+      - DB_URL=postgres://grpc_comments:1234@localhost:30090/grpc_comments
+    restart: "on-failure"
+
+  organizations-service:
+    image: "organizations-service:dev"
+    build:
+      context: "./microservices/organizations-service"
+    expose:
+      - "50051"
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=development
+      - URL=0.0.0.0
+      - PORT=50051
+      - DB_URL=postgres://grpc_organizations:1234@localhost:30090/grpc_organizations
+    restart: "on-failure"
+
+  users-service:
+    image: "users-service:dev"
+    build:
+      context: "./microservices/users-service"
+    expose:
+      - "50051"
+    depends_on:
+      - postgres
+    environment:
+      - NODE_ENV=development
+      - URL=0.0.0.0
+      - PORT=50051
+      - DB_URL=postgres://grpc_users:1234@localhost:30090/grpc_users
+    restart: "on-failure"
+
+  api-gateway:
+    image: "api-gateway:dev"
+    build:
+      context: "./api-gateway"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - comments-service
+      - organizations-service
+      - users-service
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - COMMENTS_SVC_URL=localhost
+      - COMMENTS_SVC_PORT=50051
+      - ORGANIZATIONS_SVC_URL=localhost
+      - ORGANIZATIONS_SVC_PORT=50051
+      - USERS_SVC_URL=localhost
+      - USERS_SVC_PORT=50051
+    healthcheck:
+      test: [ "CMD", "wget", "localhost:3000/healthz -q -O > /dev/null 2>&1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    restart: "on-failure"
+
+  postgres:
+    image: postgres:13
+    ports:
+      - "30090:5432"
+    environment:
+      - LANGUAGE=en_US.UTF-8
+      - LC_ALL=en_US.UTF-8
+      - POSTGRES_USER=duarbdhks
+      - POSTGRES_DB=postgres
+      - POSTGRES_HOST_AUTH_METHOD=trust # PASSWORD 없이 사용하기 위해서 적용해야하는 환경변수
+    volumes:
+      - ./init-db.sh:/docker-entrypoint-initdb.d/init-db.sh
+      - ./postgres_data:/var/lib/postgresql/data
