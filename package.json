@@ -1,0 +1,19 @@
+{
+  "name": "nestjs-grpc-microservice",
+  "version": "1.0.0",
+  "description": "NestJS REST API Gateway + gRPC microservices",
+  "main": "index.js",
+  "scripts": {
+    "install": "./scripts/install.sh",
+    "build": "./scripts/build.sh",
+    "up": "docker-compose -p nest-grpc-msa up -d",
+    "down": "docker-compose -p nest-grpc-msa down",
+    "start": "npm run down && npm run install && npm run build && npm run up"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/duarbdhks/nestjs-grpc-microservice.git"
+  },
+  "author": "duarbdhks",
+  "license": "ISC"
+}
