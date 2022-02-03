@@ -75,7 +75,7 @@ services:
   postgres:
     image: postgres:13
     ports:
-      - "30090:5432"
+      - "30080:5432"
     environment:
       - LANGUAGE=en_US.UTF-8
       - LC_ALL=en_US.UTF-8
