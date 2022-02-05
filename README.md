@@ -1,4 +1,4 @@
-# NestJS REST API Gateway + gRPC microservices
+# NestJS REST API Gateway + gRPC microservices + TypeORM
 
 이 프로젝트는 [monorepo](https://gomonorepo.org/) API 게이트웨이를 포함하며 [gRPC](https://grpc.io/) b백엔드 마이크로서비스는 모두 NestJS 프레임워크와 TypeScript를 사용하여 작성된다. 이 프로젝트는 주로 학습/실험 목적으로만 사용된다.
 
