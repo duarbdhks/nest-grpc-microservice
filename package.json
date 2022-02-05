@@ -8,7 +8,8 @@
     "build": "./scripts/build.sh",
     "up": "docker-compose -p nest-grpc-msa up -d",
     "down": "docker-compose -p nest-grpc-msa down",
-    "start": "npm run down && npm run install && npm run build && npm run up"
+    "image:rm": "docker rmi comments-service:dev api-gateway:dev organizations-service:dev users-service:dev",
+    "start": "npm run down && npm run image:rm && npm run install && npm run build && npm run up"
   },
   "repository": {
     "type": "git",

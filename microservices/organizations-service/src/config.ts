@@ -5,7 +5,7 @@ export const config = {
   url: ENV.URL || '0.0.0.0',
   port: ENV.PORT || 50051,
   db: {
-    connectionString: ENV.DB_URL || 'postgres://grpc_comments:1234@localhost:30080/grpc_comments',
+    connectionString: ENV.DB_URL || 'postgres://grpc_organizations:1234@localhost:30080/grpc_organizations',
     max: +ENV.DB_POOLSIZE || 1,
   },
 }
