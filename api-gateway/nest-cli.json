@@ -6,5 +6,8 @@
     "component": false,
     "module": false,
     "service": false
+  },
+  "compilerOptions": {
+    "assets": ["**/*.proto"]
   }
 }

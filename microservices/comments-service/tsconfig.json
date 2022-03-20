@@ -16,6 +16,16 @@
     "noImplicitAny": false,
     "strictBindCallApply": false,
     "forceConsistentCasingInFileNames": false,
-    "noFallthroughCasesInSwitch": false
+    "noFallthroughCasesInSwitch": false,
+    "paths": {
+      "@server/*": ["src/*"],
+      "@common/*": ["src/common/*"],
+      "@common-util/*": ["src/common-util/*"],
+      "@entity/*": ["src/shared/entity/*"],
+      "@enum/*": ["src/shared/enum/*"],
+      "@interface/*": ["src/shared/interface/*"],
+      "@modules/*": ["src/modules/*"],
+      "@shared/*": ["src/shared/*"]
+    }
   }
 }

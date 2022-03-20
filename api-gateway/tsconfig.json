@@ -11,11 +11,14 @@
     "baseUrl": "./src",
     "incremental": true,
     "paths": {
-      "@server/*": ["./*"],
-      "@enum/*": ["shared/enum/*"],
-      "@interface/*": ["shared/interface/*"],
-      "@entity/*": ["shared/entity/*"],
-      "@modules/*": ["modules/*"]
+      "@server/*": ["src/*"],
+      "@common/*": ["src/common/*"],
+      "@common-util/*": ["src/common-util/*"],
+      "@entity/*": ["src/shared/entity/*"],
+      "@enum/*": ["src/shared/enum/*"],
+      "@interface/*": ["src/shared/interface/*"],
+      "@modules/*": ["src/modules/*"],
+      "@shared/*": ["src/shared/*"],
     }
   },
   "include": [

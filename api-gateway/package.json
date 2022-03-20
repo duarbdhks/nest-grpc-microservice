@@ -15,14 +15,16 @@
     "start:prod": "node dist/main"
   },
   "dependencies": {
+    "@grpc/grpc-js": "^1.5.4",
+    "@grpc/proto-loader": "^0.6.9",
     "@nestjs/common": "^8.0.0",
     "@nestjs/config": "^1.1.6",
     "@nestjs/core": "^8.0.0",
     "@nestjs/microservices": "^8.0.0",
     "@nestjs/platform-express": "^8.0.0",
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.13.2",
     "express": "^4.17.2",
-    "@grpc/proto-loader": "^0.6.9",
-    "@grpc/grpc-js": "^1.5.4",
     "lodash": "^4.17.21",
     "nestjs-pino": "^2.5.0",
     "pino": "^7.6.5",
