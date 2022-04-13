@@ -1,21 +1,26 @@
 import { CommentsDAO } from '@modules/comments/comments.dao'
+import { CommentListResponseDTO, CreateCommentRequestDTO } from '@modules/comments/dto'
 import { Injectable } from '@nestjs/common'
+import { comments } from '@proto/comments'
+import { common } from '@proto/common'
 import { CommentDTO } from '@shared/dto'
-import { IQuery } from '@shared/interface'
 import { plainToInstance } from 'class-transformer'
 
 @Injectable()
-export class CommentsService {
-  constructor (
+export class CommentsService implements comments.CommentsService {
+  constructor(
     private readonly commentDAO: CommentsDAO,
   ) {
   }
 
-  async findAll (query: IQuery): Promise<CommentDTO[]> {
-    console.log(query, 'duarbdhks 444444444')
-    const result = await this.commentDAO.findAll()
+  async findAll(query: common.Query): Promise<CommentListResponseDTO> {
+    const result = await this.commentDAO.getCommentList(query)
+    return plainToInstance(CommentListResponseDTO, { data: result })
+  }
 
-    console.log(result, 'duarbdhks 555555555555')
+  async create(options: CreateCommentRequestDTO): Promise<CommentDTO> {
+    const { organization, comment } = options
+    const result = await this.commentDAO.createComment({ values: { organization, comment } })
     return plainToInstance(CommentDTO, result)
   }
 }

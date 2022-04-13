@@ -1,5 +1,5 @@
 import { ClientOptions, Transport } from '@nestjs/microservices'
-import { config } from '../../config'
+import { config } from '@server/config'
 import { join } from 'path'
 
 export const CommentsServiceClientOptions: ClientOptions = {

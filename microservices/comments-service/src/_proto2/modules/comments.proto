@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package comments;
+package comments1;
 
 import "common.proto";
 

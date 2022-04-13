@@ -1,0 +1,6 @@
+syntax = "proto3";
+
+package comments;
+
+import "comments2.proto";
+import "comments.proto";

@@ -1,10 +1,10 @@
 syntax = "proto3";
 
-package comments;
+package comments2;
 
 import "common.proto";
 
-message Comment {
+message Comment2 {
   string id = 1;
   string organization = 2;
   string comment = 3;
@@ -12,18 +12,18 @@ message Comment {
   string updated_at = 5;
 }
 
-message CreateCommentRequest {
+message CreateCommentRequest2 {
   string organization = 1;
   string comment = 2;
 }
 
-message CommentList {
-  repeated Comment data = 5;
+message CommentList2 {
+  repeated Comment2 data = 5;
 }
 
-service CommentsService {
-  rpc findAll(common.Query) returns (CommentList){}
+service CommentsService2 {
+  rpc findAll(common.Query) returns (CommentList2){}
   //  rpc count(common.Query) returns (common.Count){}
-  rpc create(CreateCommentRequest) returns (Comment){}
+  rpc create(CreateCommentRequest2) returns (Comment2){}
   //  rpc destroy(common.Query) returns (common.Count){}
 }

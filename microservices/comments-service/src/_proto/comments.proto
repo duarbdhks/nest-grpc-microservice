@@ -23,7 +23,7 @@ message CommentList {
 
 service CommentsService {
   rpc findAll(common.Query) returns (CommentList){}
-  rpc count(common.Query) returns (common.Count){}
+//  rpc count(common.Query) returns (common.Count){}
   rpc create(CreateCommentRequest) returns (Comment){}
-  rpc destroy(common.Query) returns (common.Count){}
+//  rpc destroy(common.Query) returns (common.Count){}
 }

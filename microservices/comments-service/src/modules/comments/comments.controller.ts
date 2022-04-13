@@ -1,37 +1,36 @@
 import { CommentsService } from '@modules/comments/comments.service'
-import { Controller } from '@nestjs/common'
+import { CommentListResponseDTO, CreateCommentRequestDTO } from '@modules/comments/dto'
+import { Controller, Get } from '@nestjs/common'
 import { GrpcMethod } from '@nestjs/microservices'
-import { CommentListResponseDTO } from '@shared/dto'
-import { IQuery } from '@shared/interface'
-import { plainToInstance } from 'class-transformer'
-import { PinoLogger } from 'nestjs-pino'
+import { common } from '@proto/common'
+import { CommentDTO } from '@shared/dto'
 
-@Controller()
+@Controller('comments')
 export class CommentsController {
-  constructor (
+  constructor(
     private readonly commentsService: CommentsService,
-    private readonly logger: PinoLogger,
   ) {
-    logger.setContext(CommentsController.name)
   }
 
   @GrpcMethod('CommentsService', 'findAll')
-  async findAll (query: IQuery): Promise<CommentListResponseDTO> {
-    this.logger.info('CommentsController#findAll.call', query)
-
-    console.log(query, 'duarbdhks 111111')
+  async findAll(query: common.Query): Promise<CommentListResponseDTO> {
     const { attributes, where, order, offset, limit } = query
-    const result = await this.commentsService.findAll({
+    return this.commentsService.findAll({
       attributes,
       where: where ? JSON.parse(where) : undefined,
       order: order ? JSON.parse(order) : undefined,
       offset: offset ?? 0,
       limit: limit ?? 25
     })
-    console.log(result, 'duarbdhks 2222')
+  }
 
-    this.logger.info('CommentsController#findAll.result', result)
+  @GrpcMethod('CommentsService', 'create')
+  async create(options: CreateCommentRequestDTO): Promise<CommentDTO> {
+    return this.commentsService.create(options)
+  }
 
-    return plainToInstance(CommentListResponseDTO, { data: result })
+  @Get('/rest/test')
+  async test(): Promise<any> {
+    return { hello: 'world' }
   }
 }

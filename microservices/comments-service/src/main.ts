@@ -1,14 +1,16 @@
+import { ServerCredentials } from '@grpc/grpc-js'
 import { NestFactory } from '@nestjs/core';
 import { Transport } from '@nestjs/microservices'
-import { Logger } from 'nestjs-pino'
+import { config } from '@server/config'
 import { AppModule } from './app.module';
-import { config } from './config';
-import * as path from 'path'
+import * as path from 'path';
 
-async function bootstrap () {
-  const app = await NestFactory.createMicroservice(AppModule, {
+async function bootstrap() {
+  const app = await NestFactory.create(AppModule)
+  app.connectMicroservice({
     transport: Transport.GRPC,
     options: {
+      credentials: ServerCredentials.createInsecure(),
       url: `${config.url}:${config.port}`,
       package: 'comments',
       protoPath: path.join(__dirname, './_proto/comments.proto'),
@@ -16,13 +18,13 @@ async function bootstrap () {
         enums: String,
         objects: true,
         arrays: true,
-      }
+      },
     }
   })
+  // app.useLogger(app.get(Logger))
 
-  app.useLogger(app.get(Logger))
-
-  return app.listen()
+  await app.startAllMicroservices()
+  await app.listen(50052)
 }
 
 bootstrap();

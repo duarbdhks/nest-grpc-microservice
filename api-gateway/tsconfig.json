@@ -5,12 +5,20 @@
     "removeComments": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
     "target": "es2017",
     "sourceMap": true,
     "outDir": "./dist",
-    "baseUrl": "./src",
+    "baseUrl": "./",
     "incremental": true,
+    "skipLibCheck": true,
+    "strictNullChecks": false,
+    "noImplicitAny": false,
+    "strictBindCallApply": false,
+    "forceConsistentCasingInFileNames": false,
+    "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@proto/*": ["src/_proto/*"],
       "@server/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@common-util/*": ["src/common-util/*"],
@@ -18,14 +26,7 @@
       "@enum/*": ["src/shared/enum/*"],
       "@interface/*": ["src/shared/interface/*"],
       "@modules/*": ["src/modules/*"],
-      "@shared/*": ["src/shared/*"],
+      "@shared/*": ["src/shared/*"]
     }
-  },
-  "include": [
-    "src/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist"
-  ]
+  }
 }

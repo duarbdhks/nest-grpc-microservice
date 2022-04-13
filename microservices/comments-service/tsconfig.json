@@ -18,6 +18,7 @@
     "forceConsistentCasingInFileNames": false,
     "noFallthroughCasesInSwitch": false,
     "paths": {
+      "@proto/*": ["src/_proto/*"],
       "@server/*": ["src/*"],
       "@common/*": ["src/common/*"],
       "@common-util/*": ["src/common-util/*"],
